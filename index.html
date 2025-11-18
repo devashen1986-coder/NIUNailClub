@@ -45,6 +45,12 @@
             font-size: 14px;
             color: #777;
         }
+        /* 圖片預覽 */
+        #preview img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -98,8 +104,32 @@
         <div class="activity-date">2024 / 11</div>
         <p>由社員親手製作穿戴甲與文創商品，並在校慶活動中展售與體驗試戴。</p>
     </div>
-
 </section>
+
+<!-- 新增：上傳照片區塊 -->
+<section>
+    <h2>🖼️ 上傳你的美甲作品照片</h2>
+    <p>選擇圖片後會立即顯示預覽：</p>
+    
+    <input type="file" id="photoInput" accept="image/*">
+    <div id="preview"></div>
+</section>
+
+<script>
+    const input = document.getElementById("photoInput");
+    const preview = document.getElementById("preview");
+
+    input.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.innerHTML = `<img src="${e.target.result}" />`;
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
 
 </body>
 </html>
